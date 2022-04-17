@@ -82,7 +82,6 @@ do_text	proc
         div bx
 
         ;ax частное, но вытянем al
-
         ;div ax, 160
         ;xor bl, bl
         mov bl, 160d
@@ -218,7 +217,7 @@ up_str  proc
 
         mov cx, (HALF_LEN-2d)*2d
         
-         @@DoStr:
+        @@DoStr:
 
 	mov byte ptr es:[bx],    HOR_SYM
 	mov byte ptr es:[bx+1],  COLOR

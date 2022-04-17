@@ -200,7 +200,7 @@ up_str  proc
 
         mov cx, (HALF_LEN-2d)*2d
         
-         @@DoStr:
+        @@DoStr:
 
 	mov byte ptr es:[bx],    HOR_SYM
 	mov byte ptr es:[bx+1],  COLOR

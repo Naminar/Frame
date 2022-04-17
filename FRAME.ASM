@@ -11,7 +11,7 @@ VIDEO equ 0b800h
 
 HOR_SYM		= 0cdh
 VER_SYM		= 0bah
-COLOR       	= 0ceh ;17h
+COLOR       	= 04eh ;17h
 HALF_LEN    	= 15d
 CAL_NUM     	= 1d
 HL          	= 0c9h
@@ -100,9 +100,7 @@ do_text	proc
         ret
         
         symple:
-        inc now_len;;;;;;;;;;;;;;;;
-        
-        
+        inc now_len
         
         mov byte ptr es:[bx], al
         mov byte ptr es:[bx+1], COLOR
@@ -117,14 +115,34 @@ do_text	proc
         ret
 
         Backspase:
+        mov ax, now_len
+        cmp ax, 0h 
+        je BackCal
+
         sub bx, 2
         mov byte ptr es:[bx], ' '
         mov byte ptr es:[bx+1], COLOR
         sub now_len, 1
+        
         ret
+
+                BackCal:
+
+                sub bx, 160
+                add bx, (HALF_LEN-3d)*4d+2d
+                
+                dec now_height
+
+                mov byte ptr es:[bx], ' '
+                mov byte ptr es:[bx+1], COLOR
+                
+                mov now_len, (HALF_LEN-2d)*2d-1d
+                
+                ret
         
         expansion:
 
+        inc max_height
         ;sub bx, 2
 
         sub bx, 2d
@@ -200,7 +218,7 @@ up_str  proc
 
         mov cx, (HALF_LEN-2d)*2d
         
-        @@DoStr:
+         @@DoStr:
 
 	mov byte ptr es:[bx],    HOR_SYM
 	mov byte ptr es:[bx+1],  COLOR
@@ -238,6 +256,8 @@ lw_str  proc
 
 ;================================================
 ;               VARIABLES
+
+.data
 
 max_height  dw CAL_NUM
 max_len     dw (HALF_LEN-2d)*2d

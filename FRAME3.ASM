@@ -131,7 +131,7 @@ do_text	proc
         mov cx, (HALF_LEN-2d)*2D
 
         mov byte ptr es:[bx],    VER_SYM
-		mov byte ptr es:[bx+1],  COLOR
+	mov byte ptr es:[bx+1],  COLOR
         add bx, 2d
 
         @@DoStr:

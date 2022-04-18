@@ -73,11 +73,11 @@ do_text	proc
         jne symple  
         
         NewEmptyStr:
-        inc now_height
+        inc [now_height]
 
         mov ax, bx
         mov dx, 0
-        mov now_len, dx
+        mov [now_len], dx
         mov bx, 160d
         div bx
 
@@ -91,21 +91,21 @@ do_text	proc
         
         add bx, (80d+40d-HALF_LEN+1)*2d
         
-        mov dx, now_height
-        cmp dx, max_height
+        mov dx, [now_height]
+        cmp dx, [max_height]
         jnbe expansion
 
         mov al, ' '
         ret
         
         symple:
-        inc now_len
+        inc [now_len]
         
         mov byte ptr es:[bx], al
         mov byte ptr es:[bx+1], COLOR
 
-        mov dx, now_len
-        cmp dx, max_len
+        mov dx, [now_len]
+        cmp dx, [max_len]
         je NewEmptyStr
         
         add bx, 2d
@@ -121,7 +121,7 @@ do_text	proc
         sub bx, 2
         mov byte ptr es:[bx], ' '
         mov byte ptr es:[bx+1], COLOR
-        sub now_len, 1
+        sub [now_len], 1
         
         ret
 
@@ -130,18 +130,18 @@ do_text	proc
                 sub bx, 160
                 add bx, (HALF_LEN-3d)*4d+2d
                 
-                dec now_height
+                dec [now_height]
 
                 mov byte ptr es:[bx], ' '
                 mov byte ptr es:[bx+1], COLOR
                 
-                mov now_len, (HALF_LEN-2d)*2d-1d
+                mov [now_len], (HALF_LEN-2d)*2d-1d
                 
                 ret
         
         expansion:
 
-        inc max_height
+        inc [max_height]
         ;sub bx, 2
 
         sub bx, 2d

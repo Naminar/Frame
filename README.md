@@ -1,6 +1,6 @@
 # Frame
 ## Available battons:
-* backspase
+* backspace
 * enter
 * esc
 

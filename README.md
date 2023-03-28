@@ -1,5 +1,5 @@
 # Frame
-## Available battons:
+## Available buttons:
 * backspace
 * enter
 * esc

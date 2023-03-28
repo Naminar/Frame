@@ -1,8 +1,8 @@
 # Frame
 ## Available buttons:
-* backspace
-* enter
-* esc
+* **``backspace``**
+* **``enter``**
+* **``esc``**
 
 ![Look like:](instr.png)
 ## After extensions
